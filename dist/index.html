@@ -1,46 +1,89 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
+<html>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>Briefly : L'info à l'essentiel</title>
-   <meta name="description" content="Briefly est la plateforme d'information de référence conçue pour ceux qui n'ont pas de temps à perdre. Décryptage de l'actualité en direct : politique, économie et technologie en résumés concis. L'info condensée, l'impact maximum.">
+    <title>Welcome to Firebase Hosting</title>
 
-<meta property="og:description" content="Briefly est la plateforme d'information de référence conçue pour ceux qui n'ont pas de temps à perdre. Nous décryptons pour vous l'actualité nationale et internationale en allant directement au cœur des faits. Accédez à des résumés haute précision, structurés pour une lecture rapide et efficace. L'info condensée, l'impact maximum, partout avec vous.">
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/12.8.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/12.8.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/12.8.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/12.8.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/12.8.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/12.8.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/12.8.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/12.8.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/12.8.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/12.8.0/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
-<meta name="twitter:description" content="L'actualité décryptée de manière concise et directe. Gagnez du temps avec Briefly : l'info à l'essentiel pour ne rien manquer des faits marquants.">
-
-    <meta name="theme-color" content="#0077b5">
-
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <style>
-      :root { --b24-blue: #0077b5; }
-      body { background: #f8fafc; color: #1a202c; font-family: system-ui, sans-serif; margin: 0; }
-      #loading-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; flex-direction: column; }
-      #box { background: white; max-width: 400px; width: 85%; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-align: center; border-top: 6px solid var(--b24-blue); }
-      h1 { font-size: 24px; font-weight: 800; font-style: italic; margin: 0 0 10px; }
+    <style media="screen">
+      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
+      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
+      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
+      @media (max-width: 600px) {
+        body, #message { margin-top: 0; background: white; box-shadow: none; }
+        body { border-top: 16px solid #ffa100; }
+      }
     </style>
-  <script type="module" crossorigin src="/assets/index-B5t9Yvuq.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-DTIhRj_0.css">
-</head>
-<body>
-    <div id="root">
-        <div id="loading-screen">
-            <div id="box">
-                <h1 style="color: var(--b24-blue)">BRIEFLY</h1>
-                <p style="font-size: 14px; color: #666; font-weight: bold; text-transform: uppercase;">Chargement en cours...</p>
-            </div>
-        </div>
+  </head>
+  <body>
+    <div id="message">
+      <h2>Welcome</h2>
+      <h1>Firebase Hosting Setup Complete</h1>
+      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
+      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
     </div>
+    <p id="load">Firebase SDK Loading&hellip;</p>
 
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        // firebase.firestore().doc('/foo/bar').get().then(() => { });
+        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        // firebase.analytics(); // call to activate
+        // firebase.analytics().logEvent('tutorial_completed');
+        // firebase.performance(); // call to activate
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
-    <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";
-    fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));
-    webpushr('setup',{'key':'BF6Jd562BuMPlEZrJ9cyVO6T0wFPkmK_N3VwvfSz7Y5zBmnQqQI1AL2wToxJrSDH1abK98csmNNqTi59Uq6GqVU' });</script>
-</body>
+        try {
+          let app = firebase.app();
+          let features = [
+            'auth', 
+            'database', 
+            'firestore',
+            'functions',
+            'messaging', 
+            'storage', 
+            'analytics', 
+            'remoteConfig',
+            'performance',
+          ].filter(feature => typeof app[feature] === 'function');
+          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+  </body>
 </html>
