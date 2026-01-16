@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bbriefly-7e3b8.web.app/sitemap.xml

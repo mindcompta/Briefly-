@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRIEFLY. |Maintenance générale</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@1,900&family=Plus+Jakarta+Sans:wght@200;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- INTRO CINÉMATIQUE --- */
+        #intro-screen {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 1.2s cubic-bezier(1, 0, 0, 1), opacity 1s;
+        }
+
+        .terminal-text {
+            font-family: 'JetBrains Mono', monospace;
+            color: #3b82f6;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .loader-bar-container {
+            width: 250px;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loader-bar-fill {
+            position: absolute;
+            height: 100%;
+            width: 0%;
+            background: #3b82f6;
+            box-shadow: 0 0 15px #3b82f6;
+            transition: width 3s cubic-bezier(0.1, 0, 0.3, 1);
+        }
+
+        .glitch-text {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-style: italic;
+            font-size: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        /* --- CONTENU PRINCIPAL --- */
+        #main-site {
+            opacity: 0;
+            transition: opacity 2s ease;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        canvas {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .final-logo {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-style: italic;
+            font-size: clamp(4rem, 15vw, 8rem);
+            letter-spacing: -0.05em;
+            margin-bottom: 1rem;
+            background: linear-gradient(to bottom, #fff 40%, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .status-tag {
+            text-transform: uppercase;
+            letter-spacing: 0.5em;
+            font-size: 0.7rem;
+            color: #3b82f6;
+            font-weight: 800;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="intro-screen">
+        <div class="terminal-text" id="status-msg">System.init()</div>
+        <div class="loader-bar-container">
+            <div class="loader-bar-fill" id="loader"></div>
+        </div>
+        <div class="glitch-text mt-8" id="intro-logo">BRIEFLY.</div>
+    </div>
+
+    <main id="main-site">
+        <canvas id="flux-canvas"></canvas>
+        
+        <div class="content-layer">
+            <div class="status-tag">Migration Flutter en cours</div>
+            <h1 class="final-logo">BRIEFLY.</h1>
+            <p class="text-slate-400 max-w-lg mx-auto font-light leading-relaxed px-6">
+                Nous réinventons la manière dont vous consommez l'information. 
+                Une architecture plus rapide, un design plus pur, une expérience totale.
+            </p>
+            <div class="mt-12 text-[10px] text-slate-600 uppercase tracking-[0.6em]">
+                Interagissez avec l'énergie du flux
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // --- LOGIQUE DE L'INTRO ---
+        const loader = document.getElementById('loader');
+        const statusMsg = document.getElementById('status-msg');
+        const introLogo = document.getElementById('intro-logo');
+        const introScreen = document.getElementById('intro-screen');
+        const mainSite = document.getElementById('main-site');
+
+        const messages = ["Decrypting...", "Optimizing Assets...", "Building UI...", "Ready."];
+
+        window.addEventListener('load', () => {
+            // Animation de la barre
+            setTimeout(() => { 
+                loader.style.width = '100%'; 
+            }, 100);
+
+            // Changement des messages terminal
+            let msgIdx = 0;
+            const msgInterval = setInterval(() => {
+                statusMsg.innerText = messages[msgIdx];
+                msgIdx++;
+                if(msgIdx >= messages.length) clearInterval(msgInterval);
+            }, 700);
+
+            // Apparition du logo intro
+            setTimeout(() => {
+                introLogo.style.opacity = '1';
+                introLogo.style.transform = 'translateY(0)';
+            }, 1500);
+
+            // Transition finale
+            setTimeout(() => {
+                introScreen.style.transform = 'translateY(-100%)';
+                mainSite.style.opacity = '1';
+            }, 3500);
+        });
+
+        // --- LOGIQUE DU FLUX INTERACTIF ---
+        const canvas = document.getElementById('flux-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: -100, y: -100 };
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < 150; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2,
+                    speedX: (Math.random() - 0.5) * 1,
+                    speedY: (Math.random() - 0.5) * 1
+                });
+            }
+        }
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.x += p.speedX;
+                p.y += p.speedY;
+
+                if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+
+                let dx = mouse.x - p.x;
+                let dy = mouse.y - p.y;
+                let distance = Math.sqrt(dx*dx + dy*dy);
+
+                if (distance < 150) {
+                    ctx.strokeStyle = `rgba(59, 130, 246, ${1 - distance/150})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    ctx.stroke();
+                }
+
+                ctx.fillStyle = '#3b82f6';
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        animate();
+    </script>
+</body>
+</html>
